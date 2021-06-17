@@ -114,6 +114,7 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
     
     sendTime = [NSDate timeIntervalSinceReferenceDate];
     self.view.backgroundColor = [MQChatViewConfig sharedConfig].chatViewStyle.backgroundColor ?: [UIColor colorWithWhite:0.95 alpha:1];
+    [self initHeadView];
     [self initChatTableView];
     [self initInputBar];
     [self layoutViews];
@@ -140,6 +141,20 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
     shouldSendInputtingMessageToServer = YES;
     
 
+}
+
+- (void)initHeadView {
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
+    UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 193)];
+    UIImageView *backgroudImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, UIScreen.mainScreen.bounds.size.width, 193)];
+    [backgroudImageView setImage: [[MQAssetUtil imageFromBundleWithName:@"chatview_top_backgroud"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    [topView addSubview: backgroudImageView];
+    [self.view addSubview:topView];
+    
 }
 
 - (void)presentUI {
