@@ -678,6 +678,7 @@ static NSString * kSwitchShowUnreadMessageCount = @"kSwitchShowUnreadMessageCoun
     [chatViewStyle setOutgoingMsgTextColor:[UIColor darkTextColor]];
     [chatViewStyle setEnableRoundAvatar:true];
     
+    [chatViewManager setincomingDefaultAvatarImage:avatar];
     [chatViewManager setoutgoingDefaultAvatarImage:avatar];
     [chatViewManager pushMQChatViewControllerInViewController:self];
 }

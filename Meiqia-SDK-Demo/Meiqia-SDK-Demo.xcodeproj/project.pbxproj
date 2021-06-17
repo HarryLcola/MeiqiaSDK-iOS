@@ -1627,7 +1627,7 @@
 				TargetAttributes = {
 					CCE9D1051C1812F6004E862E = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = H22N8T6DAX;
+						DevelopmentTeam = 33ZAYMV78T;
 						ProvisioningStyle = Automatic;
 					};
 					CCE9D11E1C1812F6004E862E = {
@@ -2057,7 +2057,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = NO;
-				DEVELOPMENT_TEAM = H22N8T6DAX;
+				DEVELOPMENT_TEAM = 33ZAYMV78T;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
@@ -2102,7 +2102,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = YES;
-				DEVELOPMENT_TEAM = H22N8T6DAX;
+				DEVELOPMENT_TEAM = 33ZAYMV78T;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
