@@ -41,6 +41,7 @@
 #import "MEIQIA_InputView.h"
 #import "MQCellModelProtocol.h"
 #import "MQVideoPlayerViewController.h"
+#import "MQChatCardView.h"
 
 static CGFloat const kMQChatViewInputBarHeight = 80.0;
 
@@ -54,6 +55,7 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
 
 @property (nonatomic, strong) id evaluateBarButtonItem;//保存隐藏的barButtonItem
 @property (nonatomic, strong) MQBottomBar *bottomBar;
+@property (nonatomic, strong) MQChatCardView *cardView;
 @property (nonatomic, strong) NSLayoutConstraint *constaintInputBarHeight;
 @property (nonatomic, strong) NSLayoutConstraint *constraintInputBarBottom;
 @property (nonatomic, strong) MQEvaluationView *evaluationView;
@@ -154,6 +156,8 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
     [backgroudImageView setImage: [[MQAssetUtil imageFromBundleWithName:@"chatview_top_backgroud"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [topView addSubview: backgroudImageView];
     [self.view addSubview:topView];
+    
+    [self initCarView];
     
 }
 
@@ -356,6 +360,10 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
     [self.view addSubview:self.bottomBar];
 }
 
+-(void)initCarView {
+    [self.view addSubview:self.cardView];
+}
+
 - (void)layoutViews {
     self.chatTableView.translatesAutoresizingMaskIntoConstraints = NO;
     self.bottomBar.translatesAutoresizingMaskIntoConstraints = NO;
@@ -365,7 +373,7 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
     [constrains addObjectsFromArray:[self addFitWidthConstraintsToView:self.chatTableView onTo:self.view]];
     [constrains addObjectsFromArray:[self addFitWidthConstraintsToView:self.bottomBar onTo:self.view]];
     
-    [constrains addObject:[NSLayoutConstraint constraintWithItem:self.chatTableView attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:self.view attribute:(NSLayoutAttributeTop) multiplier:1 constant:0]];
+    [constrains addObject:[NSLayoutConstraint constraintWithItem:self.chatTableView attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:self.view attribute:(NSLayoutAttributeTop) multiplier:1 constant:193]];
     [constrains addObject:[NSLayoutConstraint constraintWithItem:self.chatTableView attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:self.view attribute:(NSLayoutAttributeLeft) multiplier:1 constant:0]];
     [constrains addObject:[NSLayoutConstraint constraintWithItem:self.chatTableView attribute:(NSLayoutAttributeRight) relatedBy:(NSLayoutRelationEqual) toItem:self.view attribute:(NSLayoutAttributeRight) multiplier:1 constant:0]];
     [constrains addObject:[NSLayoutConstraint constraintWithItem:self.chatTableView attribute:(NSLayoutAttributeBottom) relatedBy:(NSLayoutRelationEqual) toItem:self.bottomBar attribute:(NSLayoutAttributeTop) multiplier:1 constant:0]];
@@ -544,6 +552,7 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
     } else {
         if (![MQChatViewConfig sharedConfig].navBarRightButton && !hidden && [MQChatViewConfig sharedConfig].enableEvaluationButton) {
             item =  [[UIBarButtonItem alloc]initWithTitle:[MQBundleUtil localizedStringForKey:@"meiqia_evaluation_sheet"] style:(UIBarButtonItemStylePlain) target:self action:@selector(tapNavigationRightBtn:)];
+            [item setTintColor: UIColor.whiteColor];
         }
     }
     
@@ -1252,8 +1261,7 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
 
 - (MQBottomBar *)bottomBar {
     if (!_bottomBar) {
-        MQTabInputContentView *contentView = [[MQTabInputContentView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, emojikeyboardHeight )];
-        
+        MQTabInputContentView *contentView = [[MQTabInputContentView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, emojikeyboardHeight)];
         _bottomBar = [[MQBottomBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kMQChatViewInputBarHeight) contentView: contentView];
         _bottomBar.delegate = self;
         _bottomBar.contentViewDelegate = self;
@@ -1261,6 +1269,14 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
         
     }
     return _bottomBar;
+}
+
+- (MQChatCardView *)cardView {
+    if (!_cardView) {
+        _cardView = [[[NSBundle mainBundle] loadNibNamed: @"MQChatCardView" owner:nil options:nil] firstObject];
+        _cardView.frame = CGRectMake(15, MQToolUtil.kXlpObtainNaviHeight + 10, MQToolUtil.kXlpScreenWidth - 30, 80);
+    }
+    return _cardView;
 }
 
 - (MQKeyboardController *)keyboardView {

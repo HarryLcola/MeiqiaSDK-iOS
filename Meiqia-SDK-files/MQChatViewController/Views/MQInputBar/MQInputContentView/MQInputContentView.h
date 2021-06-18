@@ -52,6 +52,10 @@
 @property (strong, nonatomic) UIView *inputView;
 @property (strong, nonatomic) UIView *inputAccessoryView;
 
+@property (strong, nonatomic) UIButton *microphoneButton;
+@property (strong, nonatomic) UIButton *emojiButton;
+@property (strong, nonatomic) UIButton *extendButton;
+
 //- (BOOL)isFirstResponder;
 //- (BOOL)becomeFirstResponder;
 //- (BOOL)resignFirstResponder;
