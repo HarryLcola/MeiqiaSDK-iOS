@@ -14,4 +14,5 @@
 
 + (NSString *)localizedStringForKey:(NSString *)key;
 
++ (NSBundle *)loadMainBunld;
 @end

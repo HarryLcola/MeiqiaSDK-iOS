@@ -157,9 +157,7 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
     [topView addSubview: backgroudImageView];
     [self.view addSubview:topView];
     
-    _cardView = [[[NSBundle mainBundle] loadNibNamed: @"MQChatCardView" owner:nil options:nil] firstObject];
-    _cardView.frame = CGRectMake(15, MQToolUtil.kXlpObtainNaviHeight + 10, MQToolUtil.kXlpScreenWidth - 30, 80);
-    [self.view addSubview:_cardView];
+    [self initCarView];
     
 }
 
@@ -360,6 +358,10 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
  */
 - (void)initInputBar {
     [self.view addSubview:self.bottomBar];
+}
+
+-(void)initCarView {
+    [self.view addSubview:self.cardView];
 }
 
 - (void)layoutViews {
@@ -1267,6 +1269,14 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
         
     }
     return _bottomBar;
+}
+
+- (MQChatCardView *)cardView {
+    if (!_cardView) {
+        _cardView = [[[MQBundleUtil loadMainBunld] loadNibNamed:@"MQChatCardView" owner: nil options:nil] firstObject];
+        _cardView.frame = CGRectMake(15, MQToolUtil.kXlpObtainNaviHeight + 10, MQToolUtil.kXlpScreenWidth - 30, 80);
+    }
+    return _cardView;
 }
 
 - (MQKeyboardController *)keyboardView {

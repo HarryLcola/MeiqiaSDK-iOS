@@ -15,7 +15,6 @@
 
 + (NSBundle *)assetBundle
 {
-//    NSString *bundleResourcePath = [NSBundle mainBundle].resourcePath;
     NSString *bundleResourcePath = [NSBundle bundleForClass:[MQChatViewController class]].resourcePath;
     NSString *assetPath = [bundleResourcePath stringByAppendingPathComponent:@"MQChatViewAsset.bundle"];
     return [NSBundle bundleWithPath:assetPath];
@@ -29,4 +28,12 @@
     
     return string;
 }
+
+
++ (NSBundle *)loadMainBunld
+{
+    NSString *bundleResourcePath = [NSBundle bundleForClass:[MQChatViewController class]].resourcePath;
+    return [NSBundle bundleWithPath:bundleResourcePath];
+}
+
 @end
