@@ -42,6 +42,7 @@
 #import "MQCellModelProtocol.h"
 #import "MQVideoPlayerViewController.h"
 #import "MQChatCardView.h"
+#import "MQExtionView.h"
 
 static CGFloat const kMQChatViewInputBarHeight = 80.0;
 
@@ -56,6 +57,7 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
 @property (nonatomic, strong) id evaluateBarButtonItem;//保存隐藏的barButtonItem
 @property (nonatomic, strong) MQBottomBar *bottomBar;
 @property (nonatomic, strong) MQChatCardView *cardView;
+@property (nonatomic, strong) MQExtionView *extionView;
 @property (nonatomic, strong) NSLayoutConstraint *constaintInputBarHeight;
 @property (nonatomic, strong) NSLayoutConstraint *constraintInputBarBottom;
 @property (nonatomic, strong) MQEvaluationView *evaluationView;
@@ -1064,6 +1066,17 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
     }
 }
 
+-(void)showExtion {
+    if ([self handleSendMessageAbility]) {
+        if (self.bottomBar.isFirstResponder) {
+            [self.bottomBar resignFirstResponder];
+        }else{
+            self.bottomBar.inputView = self.extionView;
+            [self.bottomBar becomeFirstResponder];
+        }
+    }
+}
+
 - (void)camera {
     if ([self handleSendMessageAbility]) {
         [self sendImageWithSourceType:(UIImagePickerControllerSourceTypeCamera)];
@@ -1262,10 +1275,13 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
 - (MQBottomBar *)bottomBar {
     if (!_bottomBar) {
         MQTabInputContentView *contentView = [[MQTabInputContentView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, emojikeyboardHeight)];
+        [contentView.microphoneButton addTarget:self action:@selector(showRecorder) forControlEvents:(UIControlEventTouchUpInside)];
+        [contentView.emojiButton addTarget:self action:@selector(emoji) forControlEvents:(UIControlEventTouchUpInside)];
+        [contentView.extendButton addTarget: self action:@selector(showExtion) forControlEvents:UIControlEventTouchUpInside];
         _bottomBar = [[MQBottomBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kMQChatViewInputBarHeight) contentView: contentView];
         _bottomBar.delegate = self;
         _bottomBar.contentViewDelegate = self;
-        [contentView setupButtons];
+//        [contentView setupButtons];
         
     }
     return _bottomBar;
@@ -1294,6 +1310,16 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
         _displayRecordView.backgroundColor = [[UIColor alloc] initWithRed: 242/255.0 green: 242/255.0 blue: 247/255.0 alpha: 1];
     }
     return _displayRecordView;
+}
+
+- (MQExtionView *)extionView {
+    if (!_extionView) {
+        _extionView = [[[MQBundleUtil loadMainBunld] loadNibNamed:@"MQExtionView" owner: nil options:nil] firstObject];
+        _extionView.frame = CGRectMake(0, 0, self.view.frame.size.width, 120);
+        [_extionView.photoesButton addTarget:self action:@selector(imageRoll) forControlEvents:(UIControlEventTouchUpInside)];
+        [_extionView.camaraButton addTarget:self action:@selector(camera) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _extionView;
 }
 
 - (MQRecordView *)recordView {

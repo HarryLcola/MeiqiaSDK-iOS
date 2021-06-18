@@ -20,8 +20,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-//        self.textField = [[MEIQIA_HPGrowingTextView alloc] initWithFrame:CGRectMake(50, 15, self.frame.size.width - 140, self.frame.size.height)];
-        self.textField = [[MEIQIA_HPGrowingTextView alloc] initWithFrame:CGRectMake(15, 5, self.frame.size.width - 30 , self.frame.size.height)];
+        self.textField = [[MEIQIA_HPGrowingTextView alloc] initWithFrame:CGRectMake(50, 15, self.frame.size.width - 140, self.frame.size.height)];
         self.textField.placeholder = @"有什么需要帮忙的吗?";
 
         self.textField.font = [UIFont systemFontOfSize:15];
@@ -40,17 +39,17 @@
         tabBackgroud.backgroundColor = [UIColor colorWithRed:248/255.0 green:248/255.0 blue:253/255.0 alpha:1];
         [self addSubview:tabBackgroud];
         
-//        self.microphoneButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 18, 30, 30)];
-//        [self.microphoneButton setImage: [MQAssetUtil imageFromBundleWithName:@"microphone"] forState: UIControlStateNormal];
-//        [self addSubview: self.microphoneButton];
-//
-//        self.extendButton = [[UIButton alloc] initWithFrame:CGRectMake(UIScreen.mainScreen.bounds.size.width - 40, 18, 30, 30)];
-//        [self.extendButton setImage: [MQAssetUtil imageFromBundleWithName:@"extend"] forState: UIControlStateNormal];
-//        [self addSubview: self.extendButton];
-//
-//        self.emojiButton = [[UIButton alloc] initWithFrame:CGRectMake(UIScreen.mainScreen.bounds.size.width - 80, 18, 30, 30)];
-//        [self.emojiButton setImage: [MQAssetUtil imageFromBundleWithName:@"emoji"] forState: UIControlStateNormal];
-//        [self addSubview: self.emojiButton];
+        self.microphoneButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 18, 30, 30)];
+        [self.microphoneButton setImage: [MQAssetUtil imageFromBundleWithName:@"microphone"] forState: UIControlStateNormal];
+        [self addSubview: self.microphoneButton];
+
+        self.extendButton = [[UIButton alloc] initWithFrame:CGRectMake(UIScreen.mainScreen.bounds.size.width - 40, 18, 30, 30)];
+        [self.extendButton setImage: [MQAssetUtil imageFromBundleWithName:@"extend"] forState: UIControlStateNormal];
+        [self addSubview: self.extendButton];
+
+        self.emojiButton = [[UIButton alloc] initWithFrame:CGRectMake(UIScreen.mainScreen.bounds.size.width - 80, 18, 30, 30)];
+        [self.emojiButton setImage: [MQAssetUtil imageFromBundleWithName:@"emoji"] forState: UIControlStateNormal];
+        [self addSubview: self.emojiButton];
             
     }
     return self;
